@@ -17,7 +17,8 @@ fi
 
 # --- Verify the volume is mounted ---
 if ! mountpoint -q "$MOUNT_POINT"; then
-    echo "Error: ${MOUNT_POINT} is not a mountpoint. Is the volume attached and mounted?" >&2
+    echo "Error: ${MOUNT_POINT} is not a mountpoint. Is the volu
+    me attached and mounted?" >&2
     exit 1
 fi
 
@@ -101,7 +102,7 @@ echo "Data copied and permissions set."
 
 # --- Update MySQL config ---
 echo "Updating MySQL datadir in ${MYSQL_CONF}..."
-sed -i "s|^datadir\s*=.*|datadir = ${DATA_SUBDIR}|" "$MYSQL_CONF"
+sed -i "s|^#\?\s*datadir\s*=.*|datadir = ${DATA_SUBDIR}|" "$MYSQL_CONF"
 
 # --- Update AppArmor if active ---
 if aa-status --enabled 2>/dev/null && [[ -f "$APPARMOR_PROFILE" ]]; then
