@@ -16,7 +16,7 @@ keyGen() {
     then
         echo "Keys successfullly generated!"
         echo "Encrypting key file..."
-        openssl enc -aes-256-cbc -k  -in keys -out keys.enc
+        openssl enc -aes-256-cbc -pbkdf2 -iter 100000 -in keys -out keys.enc
         if [[ -s keys.enc ]]
         then
             echo "Key file successfully encrypted!"

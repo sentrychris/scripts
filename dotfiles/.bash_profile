@@ -1,17 +1,5 @@
 #/usr/bin/env bash
 
-function vm
-{
-  ( cd ~/workspace/servers/$1 && vagrant $2 )
-}
-
-function initvw
-{
-  export WORKON_HOME=~/.virtualenvs
-  VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3.6'
-  source /usr/local/bin/virtualenvwrapper.sh
-}
-
 function extract {
   if [ -f $1 ]; then
     case $1 in
@@ -44,10 +32,6 @@ PATH="$PATH:/home/chris/.config/composer/vendor/bin"
 
 # Bash prompt
 PS1='\[\033]0;${PWD//[^[:ascii:]]/?}\007\]'
-PS1=$PS1'\[\033[1;38;5;117m\]\u\[\033[1;00m\]@\[\033[1;38;5;117m\]\h '
+PS1=$PS1'\[\033[1;38;5;117m\]\u '
 PS1=$PS1'\[\033[1;00m\]\w'
 PS1=$PS1'\[\033[1;38;5;218m\]$(gitbranch)\[\033[1;38;5;166m\] λ \[\033[1;00m\]'
-
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
